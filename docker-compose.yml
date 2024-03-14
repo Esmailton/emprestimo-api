@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  djangoapi:
+    container_name: djangoapi
+    build: .
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/djangoapp
+    env_file:
+      - .env
+    depends_on:
+      - loandb
+  loandb:
+    container_name: loandb
+    image: postgres:16-alpine
+    volumes:
+      - ./data/postgres/data:/var/lib/postgresql/data/
+    env_file:
+      - .env

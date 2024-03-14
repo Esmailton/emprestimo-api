@@ -1,0 +1,12 @@
+SECRET_KEY = 'django-insecure-wst^53kv_b%%ol*o+(uyyq0$t9noe7cmu9_v64ph_ehb^8g%-p'
+DEBUG = True
+
+POSTGRES_DB = loandb
+POSTGRES_USER = postgres
+POSTGRES_PASSWORD = 123456
+POSTGRES_HOST = loandb
+POSTGRES_PORT = 5432    
+
+SUPER_USER_PASSWORD="SuperSecr3t#"
+SUPER_USER_NAME="jhon"
+SUPER_USER_EMAIL="jhon@gmail.com"
