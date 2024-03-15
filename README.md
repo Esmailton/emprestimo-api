@@ -38,6 +38,6 @@ você pode obter toda a documentação da API no Swagger após startar o projeto
 
 ## Documentação
 ```bash
-http://localhost:8000/swagger`
+http://localhost:8000/swagger
 
 ```
