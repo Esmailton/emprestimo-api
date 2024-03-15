@@ -31,7 +31,7 @@ class TestInstallmentSerializer(TestCase):
 
         loan = Loan.objects.create(
             contracted_amount=1000, remaining_amount=1000, tax_fees=5,
-            number_of_installments=12, ip=ModelBase.create_loan_ip(), status="0")
+            number_of_installments=12, ip=ModelBase.create_loan_ip())
 
         data = {'loan': loan, 'installment_number': 1,
                 'amount': 200, "due_date": "2025-03-10"}
@@ -57,7 +57,7 @@ class TestLoanSerializer(TestCase):
     def test_create_loan(self):
         data = {'contracted_amount': 1000, 'description': 'Capital de Giro',
                 'remaining_amount': 1000, 'number_of_installments': 12,
-                'tax_fees': 5, 'status': '1', 'bank': "BANCO FOO", "ip": self.ip, "client": "Jhon"}
+                'tax_fees': 5, 'bank': "BANCO FOO", "ip": self.ip, "client": "Jhon"}
         request = APIRequestFactory().post('/api/v1/loan/')
         request.user = self.user
         serializer = LoanSerializer(data=data, context={'request': request})
@@ -75,10 +75,10 @@ class TestPaymentSerializer(TestCase):
 
         self.loan = Loan.objects.create(
             contracted_amount=1000, remaining_amount=1000, tax_fees=5, number_of_installments=12,
-            ip=self.ip, client="Jhon", status="1")
+            ip=self.ip, client="Jhon")
 
         self.installment = Installment.objects.create(
-            loan=self.loan, installment_number=1, amount=100, due_date="2025-04-03", status="1")
+            loan=self.loan, installment_number=1, amount=100, due_date="2025-04-03")
 
     def test_validate_installment(self):
         data = {'loan': self.loan.pk, 'installment': 999}

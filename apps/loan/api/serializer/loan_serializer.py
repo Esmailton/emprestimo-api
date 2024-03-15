@@ -6,6 +6,7 @@ from apps.loan.api.serializer.installment_serializer import InstallmentSerialize
 class LoanSerializer(serializers.ModelSerializer):
     installments = InstallmentSerializer(many=True, read_only=True)
     ip = serializers.CharField(read_only=True)
+    status = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Loan
@@ -32,5 +33,4 @@ class LoanSerializer(serializers.ModelSerializer):
         validated_data['remaining_amount'] = total_amount
         validated_data['ip'] = loan_ip
         validated_data['user'] = user
-        validated_data['status'] = "1"
         return super().create(validated_data)

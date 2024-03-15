@@ -1,4 +1,3 @@
-from django.utils.translation import gettext_lazy as _
 from django.db.models import IntegerChoices
 
 
@@ -8,19 +7,17 @@ class InstallmentsStatus(IntegerChoices):
     PAGA = 2
 
 
-PAYMENTS_METHODS = [
-    ("0", _("OUTROS")),
-    ("1", _("PIX")),
-    ("2", _("BOLETO")),
-    ("3", _("CARTÃO")),
-    ("4", _("TRANSFERÊNCIA")),
-    ("5", _("DINHEIRO")),
-]
+class PaymentsMethods(IntegerChoices):
+    OUTROS = 0
+    PIX = 1
+    BOLETO = 2
+    CARTAO = 3
+    TRANSFERENCIA = 4
+    DINHEIRO = 5
 
-LOAN_STATUS = [
-    ("0", _("OUTROS")),
-    ("1", _("ATIVO")),
-    ("2", _("QUITADO")),
-    ("3", _("CANCELADO")),
-    ("4", _("EM ATRASO")),
-]
+
+class LoanStatus(IntegerChoices):
+    OUTROS = 0
+    ATIVO = 1
+    QUITADO = 2
+    CANCELADO = 3

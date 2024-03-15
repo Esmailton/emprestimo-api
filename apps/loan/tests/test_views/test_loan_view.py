@@ -5,6 +5,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 from apps.loan.models import Loan, Installment, Payment
 from apps.loan.tests.test_models.integration_tests.model_base import ModelBase
+from apps.loan.choices import PaymentsMethods
 
 
 class TestLoanViews(APITestCase):
@@ -20,19 +21,17 @@ class TestLoanViews(APITestCase):
             number_of_installments=12,
             tax_fees=5,
             bank='BANCO DO BRASIL',
-            status="1",
             ip=ModelBase.create_loan_ip(),
             user=self.user
         )
         self.installment = Installment.objects.create(
             amount=100,
             installment_number=1,
-            status='1',
             due_date='2024-03-15',
             loan=self.loan
         )
         self.payment = Payment.objects.create(
-            payment_method='Credit Card',
+            payment_method=PaymentsMethods.PIX,
             amount=50,
             installment=self.installment
         )

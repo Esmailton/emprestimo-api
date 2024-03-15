@@ -24,7 +24,6 @@ class ModelBase:
             number_of_installments=faker.random_int(min=1, max=12),
             tax_fees=5,
             bank="BANCO DO BRASIL",
-            status="1",
             client="jhon",
             ip=ModelBase.create_loan_ip(),
             user=user
@@ -32,13 +31,12 @@ class ModelBase:
         return loan
 
     @staticmethod
-    def create_installment(loan=None, status='1'):
+    def create_installment(loan=None):
         if loan is None:
             loan = ModelBase.create_loan()
         return Installment.objects.create(
             amount=faker.pydecimal(left_digits=4, right_digits=2),
             installment_number=faker.random_int(min=1, max=12),
-            status=status,
             due_date=faker.date_this_year(),
             loan=loan
         )

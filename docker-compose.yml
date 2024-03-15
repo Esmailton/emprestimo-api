@@ -6,16 +6,20 @@ services:
     build: .
     ports:
       - 8000:8000
-    volumes:
-      - ./:/djangoapp
-    env_file:
-      - .env
+    environment:
+      - SECRET_KEY='django-insecure-wst^53kv_b%%ol*o+(uyyq0$t9noe7cmu9_v64ph_ehb^8g%-p'
+      - DEBUG=False
+      - POSTGRES_DB=loandb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_HOST=loandb
+      - POSTGRES_PORT=5432 
     depends_on:
       - loandb
   loandb:
     container_name: loandb
     image: postgres:16-alpine
-    volumes:
-      - ./data/postgres/data:/var/lib/postgresql/data/
-    env_file:
-      - .env
+    environment:
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=loandb

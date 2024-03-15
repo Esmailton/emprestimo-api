@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from apps.core.models import Base
-from apps.loan.choices import InstallmentsStatus, PAYMENTS_METHODS, LOAN_STATUS
+from apps.loan.choices import InstallmentsStatus, PaymentsMethods, LoanStatus
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from dateutil.relativedelta import relativedelta
@@ -41,8 +41,9 @@ class Loan(Base, models.Model):
         _("Juros"), max_digits=20, decimal_places=2, validators=[positive_validator],)
     bank = models.CharField(_("Banco"), max_length=20)
     client = models.CharField(_("Cliente"), max_length=60)
-    status = models.CharField(_("Status Empréstimo"), choices=LOAN_STATUS,
-                              help_text="0=OUTROS 1=ATIVO 2=QUITADO 3=CANCELADO 4=ATRASO")
+    status = models.PositiveSmallIntegerField(_("Status Empréstimo"), choices=LoanStatus.choices,
+                                              default=LoanStatus.ATIVO,
+                                              help_text="0=OUTROS 1=ATIVO 2=QUITADO 3=CANCELADO 4=ATRASO")
     ip = models.OneToOneField(LoanIp, on_delete=models.CASCADE,
                               related_name='ips')
     user = models.ForeignKey(
@@ -84,6 +85,7 @@ class Installment(Base, models.Model):
     installment_number = models.PositiveIntegerField(_("Número Parcela"))
     status = models.SmallIntegerField(
         _("Status Parcela"), choices=InstallmentsStatus.choices,
+        default=InstallmentsStatus.ATIVA,
         help_text="0=OUTROS ATIVA=1 PAGA=2")
     due_date = models.DateField(_("Data Vencimento"))
     loan = models.ForeignKey(
@@ -99,8 +101,9 @@ class Installment(Base, models.Model):
 
 
 class Payment(Base, models.Model):
-    payment_method = models.CharField(
-        _("Metodo de Pagamento"), choices=PAYMENTS_METHODS, null=True, blank=True,
+    payment_method = models.PositiveSmallIntegerField(
+        _("Metodo de Pagamento"), choices=PaymentsMethods.choices, null=True, blank=True,
+        default=PaymentsMethods.PIX,
         help_text="0=OUTROS 1=PIX 2=BOLETO 3=CARTÃO 4=TRANSFERÊNCIA 5=DINHEIRO")
     amount = models.DecimalField(
         _("Valor Transação"), max_digits=10, decimal_places=2, validators=[positive_validator],)

@@ -17,7 +17,6 @@ class InstallmentModelTestCase(TestCase):
         installment = Installment.objects.create(
             amount=Decimal('100.00'),
             installment_number=1,
-            status='1',
             due_date='2024-03-15',
             loan=self.loan
         )

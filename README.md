@@ -19,13 +19,13 @@ Obtendo um Token:
 Para obter um token e ter acessar aos endpoints protegidos, você precisa acessar o endpoint de geração de token:
 
 ```bash
-    Método: POST
+    Método: GET
     URL: /api/generate-token/
 ```
 Após obter o token, você pode incluí-lo no cabeçalho Authorization de suas solicitações. Aqui está um exemplo de como obter o token usando cURL:
 
 ```bash
-    curl -X POST http://localhost:8000/api/generate-token/
+    curl -X GET http://localhost:8000/api/generate-token/
 ```
 Isso retornará um token. Para usá-lo em solicitações subsequentes, adicione-o ao cabeçalho Authorization 
 

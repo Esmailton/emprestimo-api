@@ -2,6 +2,7 @@ import factory
 from apps.loan.models import Loan, Installment, Payment, LoanIp
 from django.contrib.auth.models import User
 from django.test import TestCase
+from apps.loan.choices import PaymentsMethods
 
 
 class UserFactory(factory.django.DjangoModelFactory):
@@ -28,7 +29,6 @@ class LoanFactory(factory.django.DjangoModelFactory):
     tax_fees = 5
     bank = 'Test Bank'
     client = 'Test Client'
-    status = '1'
     ip = factory.SubFactory(LoanIpFactory)
     user = factory.SubFactory(UserFactory)
 
@@ -39,7 +39,6 @@ class InstallmentFactory(factory.django.DjangoModelFactory):
 
     amount = 500
     installment_number = 1
-    status = 1
     due_date = '2024-03-20'
     loan = factory.SubFactory(LoanFactory)
 
@@ -48,7 +47,7 @@ class PaymentFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Payment
 
-    payment_method = '1'
+    payment_method = PaymentsMethods.PIX
     amount = 200
     installment = factory.SubFactory(InstallmentFactory)
 
