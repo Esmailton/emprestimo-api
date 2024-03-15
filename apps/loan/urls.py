@@ -19,7 +19,4 @@ urlpatterns = [
 
     path("v1/installments/",
          installment.InstallmentListView.as_view(), name="installment"),
-
-
-
 ]
