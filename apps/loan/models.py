@@ -69,7 +69,7 @@ class Loan(Base, models.Model):
                 amount=operator.truediv(
                     self.nominal_amount, self.number_of_installments),
                 installment_number=installment_number,
-                status="1",
+                status=InstallmentsStatus.ATIVA,
                 due_date=due_date
             )
             installments.append(installment)
