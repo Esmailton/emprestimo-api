@@ -34,10 +34,12 @@ assim:
     Authorization: Token cbf0fca38630b210f82c1c4cf054ecfc447d2bd6
 ```
 
-você pode obter toda a documentação da API no Swagger após startar o projeto:
+você pode obter toda a documentação da API no Swagger e Redoc após startar o projeto:
 
 ## Documentação
 ```bash
+http://localhost:8000/redoc/
+
 http://localhost:8000/swagger
 
 ```
